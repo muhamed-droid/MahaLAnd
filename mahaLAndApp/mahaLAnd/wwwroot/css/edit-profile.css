@@ -1,0 +1,23 @@
+﻿
+.profile-photo {
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    object-fit: cover; 
+}
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#addPhotoInput {
+    display: none;
+}
+
+.add-photo {
+    margin-top: 3px;
+    transform: scale(1.4);
+    cursor: pointer;
+}

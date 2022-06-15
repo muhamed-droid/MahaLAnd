@@ -1,0 +1,94 @@
+﻿@model mahaLAnd.Models.MyModel
+
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+@{
+    Layout = null;
+}
+
+<!--<p><a asp-action="Create">Create New</a></p>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MahaLAnd</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="~/css/nofication.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+<body>
+    <div class="insta">
+        <header>
+            <div class="logo">
+                <a asp-controller="Profile" asp-action="Index" asp-route-id="@Model.LoggedProfile.Id"><img src="~/img/mahaLAnd.jpg" alt="mahaLAnd" /></a>
+            </div>
+            @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+            {
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass" style="color:gray"></i>
+                    <input type="search" name="SearchedUser" placeholder="Search" />
+                </div>
+            }
+            <nav>
+                <ul>
+                    <li>
+                        <a asp-controller="Profile" asp-action="Index" asp-route-id="@Model.LoggedProfile.Id"><i class="fa-solid fa-house"></i></a>
+                    </li>
+                    <li>
+                        <a asp-controller="Post" asp-action="Create"><i class="fa-solid fa-square-plus"></i></a>
+                    </li>
+                    <li>
+                        <a asp-controller="Notification" asp-action="Index"><i class="fa-solid fa-heart"></i></a>
+                    </li>
+                    <li>
+                        <a asp-controller="Profile" asp-action="Details" asp-route-id="@Model.LoggedProfile.Id"><img src="@("~/img/"+Model.LoggedProfile.ProfilePhoto)" asp-append-version="true"></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            @foreach (var item in Model.Notifications)
+            {
+                <div class="right-side">
+                    <div class="profile-title" >
+                        <div class="profile-left">
+                            <div class="image">
+                                <img src="@("~/img/"+item.Item3.ProfilePhoto)" asp-append-version="true" width="45" height="45" />
+                            </div>
+                            <div class="details">
+                                <a asp-controller="Profile" asp-action="Details" asp-route-id="@item.Item3.Id" class="username" style="text-decoration:none;">@item.Item2.UserName</a>
+                                @if(item.Item1.Type == NotificationType.LIKE)
+                                {
+                                    <p class="notification">&nbsp;&nbsp;liked your post&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                    <div class="post">
+                                        <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Item1.PostId" >
+                                            <img src="@("~/img/"+item.Item1.Post.PostURL)" asp-append-version="true" width="45" height="45" />
+                                        </a>
+                                    </div>
+                                }
+                                else if(item.Item1.Type == NotificationType.COMMENT)
+                                {
+                                    <p class="notification">&nbsp;&nbsp;left a comment on your post&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                    <div class="post">
+                                        <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Item1.PostId" >
+                                            <img src="@("~/img/"+item.Item1.Post.PostURL)" asp-append-version="true" width="45" height="45" />
+                                        </a>
+                                    </div>
+                                }
+                                <!--else if(item.Item1.Type == NotificationType.FOLLOW)
+                                {
+                                    <p class="notification">&nbsp;&nbsp;started following you&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                }-->
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            }
+        </section>
+    </div>
+</body>
+</html>
+
+

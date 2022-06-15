@@ -1,0 +1,202 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: #fafafa;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 18%;
+    border-block: 1px solid rgba(219,219,219,1);
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+header .logo {
+    height: 35px;
+}
+header .logo img {
+    height: 100%;
+    object-fit: contain;
+}
+
+header .search-box {
+    width: 300px;
+    background-color: rgb(240,240,240,1);
+    padding: 3px 16px;
+    align-items: center;
+    border-radius: 8px;
+}
+header .search-box input {
+    height: 30px;
+    border: none;
+    outline: none;
+    background-color: rgb(240,240,240,1);
+    padding-left: 10px;
+    font-size: 15px;
+    color: #8e8e8e;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+header nav ul li {
+    margin-right: 20px;
+    padding-left: 7px;
+    margin-top: 5px;
+}
+header nav ul li:last-child {
+    margin-right: 0;
+}
+header nav ul li a img {
+    clip-path: circle();
+    margin-top: -2px;
+    margin-right: 22px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+header nav ul li a i {
+    font-size: 22px;
+    color: rgba(38,38,38,1);
+}
+
+.container {
+    padding: 0 22%;
+}
+
+.bio {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    width: 56em;
+    height: 16.5em;
+    padding: 2em;
+    border-bottom: 0.5px solid #dbdbdb;
+}
+.profile-photo {
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    object-fit: cover; 
+}
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.username-edit {
+    display: flex;
+}
+.profile-info {
+}
+.profile-info .username {
+    margin-top: 20px;
+    margin-right: 30px;
+    font-size: 1.7em;
+    color: black;
+    font-weight: 100;
+}
+
+.profile-info button {
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: white;
+    color: dimgrey;
+    font-size: 0.9em;
+    font-weight: 600;
+    width: 7em;
+    height: 2em;
+    border-color: lightgrey;
+    border-width: thin;
+    border-radius: 10%;
+    cursor: pointer;
+}
+.profile-info .gear {
+    margin-top: 22px;
+    margin-left: 20px;
+    font-size: 22px;
+    color: black;
+}
+.profile-description {
+    display: flex;
+    margin-top: 25px;
+    padding-top: 10px;
+}
+
+.gallery {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 1.7em;
+    column-gap: 1.7em;
+    position:absolute;
+}
+
+.item {
+    height: 17.5em;
+    width: 17.5em;
+    background: black;
+}
+.item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.item img:hover {
+    opacity: 0.7;
+}
+
+#addPhotoInput {
+    display: none;
+}
+
+.add-photo {
+    margin-top: 3px;
+    transform: scale(1.4);
+    cursor: pointer;
+}
+
+@media (max-width:992px) {
+    header {
+        padding: 10px 20px;
+    }
+
+    section {
+        width: 100%
+    }
+
+        section .right-side {
+            display: none;
+        }
+}
+
+/* clears the ‘X’ from Internet Explorer */
+input[type=search]::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input[type=search]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+/* clears the ‘X’ from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}

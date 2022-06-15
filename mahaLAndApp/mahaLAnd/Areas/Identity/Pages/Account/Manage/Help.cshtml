@@ -1,0 +1,30 @@
+﻿@page
+@model HelpModel
+@{
+    ViewData["Title"] = "Help";
+    ViewData["ActivePage"] = ManageNavPages.Help;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-md-8">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Question"></label>
+                <input asp-for="Input.Question" class="form-control" />
+                <span asp-validation-for="Input.Question" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Ask</button>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-controller="Question" asp-action="Index">See answers</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

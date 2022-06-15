@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model mahaLAnd.Models.MyModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Profile";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MahaLAnd</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="~/css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="insta">
+        <header>
+            <div class="logo">
+                <a asp-controller="Home" asp-action="Index"><img src="~/img/mahaLAnd.jpg" alt="mahaLAnd" /></a>
+            </div>
+            @using (Html.BeginForm("Search1", "Home", FormMethod.Get))
+            {
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass" style="color:gray"></i>
+                    <input type="search" name="SearchedUser" placeholder="Search" />
+                </div>
+            }
+            <nav>
+                <ul>
+                    <li>
+                    </li>
+                    <li>
+                    </li>
+                    <li>
+                    </li>
+                    <li>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <div class="container">
+            <section class="bio">
+                <div class="profile-photo">
+                   <!--<img src="@Model.Profile.ProfilePhoto" alt="profile-photo"/>-->
+                   <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" />
+                </div>
+                <div class="profile-info">
+                    <div class="username-edit">
+                        <p class="username">@Model.User.UserName</p>
+                        <!--<button>follow</button>-->
+                    </div>
+                    <div class="profile-description">
+                        <p style="text-decoration:none; color: black;">Posts: <b>@Model.Posts.Count</b></p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        <p style="text-decoration:none; color: black;">Followers: <b>@Model.Followers.Count</b></p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        <p style="text-decoration:none; color: black;">Following: <b>@Model.Following.Count</b></p>
+                    </div>
+                    <br />
+                    <p>@Model.Profile.Description</p>
+                </div>
+            </section>
+            <section class="gallery">
+                @foreach (var item in Model.Posts) {
+                    <a asp-controller="Post" asp-action="Details1" asp-route-id="@item.Id" class="item">
+                        <img src="@("~/img/"+item.PostURL)" asp-append-version="true" />
+                    </a>
+                }
+            </section>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<mahaLAnd.Models.Question>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<title>MahaLAnd</title>
+
+<br />
+<h1>Questions</h1>
+<br />
+
+<!--<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Answer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Answer)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Answer</a> |
+                <a asp-action="DeleteEmployee" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>-->
+<!--@foreach (var item in Model) {
+        <br />
+        <p><b>User:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>@item.UserId</p>
+        <p><b>Question: </b>@item.Text</p>
+        <div class="form-group">
+            <b>Answer:</b><input asp-for="@item.Answer" class="form-control" />
+        </div>
+        <a asp-action="DeleteEmployee" asp-route-id="@item.Id">Delete</a>
+        <br />
+}-->
+@foreach (var item in Model) {
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(item => item.UserId)
+        </dt>
+        <dd class = "col-sm-10">
+            @item.UserId
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(item => item.Text)
+        </dt>
+        <dd class = "col-sm-10">
+            <input asp-for="@item.Text" class="form-control" readonly="readonly" />
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(item => item.Answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @using (Html.BeginForm("Edit", "Question", FormMethod.Post))
+            {
+                @Html.Hidden("Id", item.Id)
+                @Html.Hidden("UserId", item.UserId)
+                @Html.Hidden("Text", item.Text)
+                <input asp-for="@item.Answer" type="text" name="Answer" class="form-control" />
+            }
+        </dd>
+        <dt class = "col-sm-2">
+            <a asp-action="DeleteEmployee" asp-route-id="@item.Id">Delete</a>
+        </dt>
+    </dl>
+    <hr />
+}

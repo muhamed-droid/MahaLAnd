@@ -1,0 +1,74 @@
+﻿@model mahaLAnd.Models.Profile
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MahaLAnd</title>
+	<meta charset="UTF-8">
+	<title>Edit Profile</title>
+	<link rel="stylesheet" href="~/css/edit-profile.css">
+</head>
+
+<br />
+<h1>Edit profile</h1>
+
+<hr />
+<br />
+<body style="background-color:#fafafa">
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="UserId" />
+            <!--<div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <label asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></label>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>-->
+            <!--<div class="form-group">
+                <label asp-for="ProfilePhoto" class="control-label">Profile photo</label>
+                <input asp-for="ProfilePhoto" class="form-control"></input>
+                <!--<div class="profile-photo">
+                    <input type="file" name="photo" id="addPhotoInput" />
+                    <label for="addPhotoInput">
+                        <i class="add-photo"><img src="@Model.ProfilePhoto" alt="mahaLAnd" /></i>
+                    </label>
+                </div>
+                <span asp-validation-for="ProfilePhoto" class="text-danger"></span>
+            </div>-->
+            <div class="form-group">
+                <label asp-for="ProfilePhotoFile" class="control-label">Profile photo</label>
+                    <input asp-for="ProfilePhotoFile" accept="image/*" />
+                    <!--<input asp-for="ProfilePhotoFile" class="custom-file-input" id="ProfileP" />-->
+                <!--<div class="custom-file">
+                    <label class="custom-file-label" for "ProfilePhotoFile">Upload image</label>
+                </div>-->
+                <span asp-validation-for="ProfilePhotoFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProfileType" class="control-label">Profile type</label>
+                <select asp-for="ProfileType" class="form-control" asp-items="Html.GetEnumSelectList<ProfileType>()"></select>
+                <span asp-validation-for="ProfileType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

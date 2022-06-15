@@ -1,0 +1,130 @@
+﻿@model mahaLAnd.Models.MyModel
+
+@{
+    ViewData["Title"] = "Post";
+}
+
+@{
+    Layout = null;
+}
+
+<!--<p><a asp-action="Create">Create New</a></p>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MahaLAnd</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="~/css/post.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+<body>
+    <div class="insta">
+        <header>
+            <div class="logo">
+                <a asp-controller="Home" asp-action="Index" asp-route-id="@Model.Profile.Id"><img src="~/img/mahaLAnd.jpg" alt="mahaLAnd" /></a>
+            </div>
+            @using (Html.BeginForm("Search1", "Home", FormMethod.Get))
+            {
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass" style="color:gray"></i>
+                    <input type="search" name="SearchedUser" placeholder="Search" />
+                </div>
+            }
+            <nav>
+                <ul>
+                    <li>
+                    </li>
+                    <li>
+                    </li>
+                    <li>
+                    </li>
+                    <li>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    <section>
+            <div class="left-side">
+                <!--<div class="story">
+
+                </div>-->
+                <div class="posts">
+                    <!--foreach-->
+                    <div class="post-title">
+                        <div class="post-left">
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <img class="post" src="@("~/img/"+Model.Post.PostURL)" asp-append-version="true" />
+                    </div>
+                    <div class="post-footer">
+                    </div>
+                    <div class="post-footer-content">
+                        <p class="likes">@Model.NumberOfLikes likes</p>
+                        <p class="name">@Model.User.UserName</p>
+                        <p class="posting-time">@Model.Post.Date.Day.@Model.Post.Date.Month.@Model.Post.Date.Year.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="profile-title" >
+                    <div class="profile-left">
+                        <div class="image">
+                            <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" width="45" height="45" />
+                        </div>
+                        <div class="details">
+                            <a asp-controller="Profile" asp-action="Details1" asp-route-id="@Model.Profile.Id" class="username" style="text-decoration:none;">@Model.User.UserName</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="border"></div>
+                <br />
+                @if(Model.Post.Description != null)
+                {
+                    <div class="profile-title" >
+                        <div class="profile-left">
+                            <div class="image">
+                                <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" width="45" height="45" />
+                            </div>
+                            <div class="details">
+                                <a asp-controller="Profile" asp-action="Details1" asp-route-id="@Model.Profile.Id" class="username" style="text-decoration:none;">@Model.User.UserName</a>
+                                <p class="description">&nbsp;&nbsp;&nbsp;@Model.Post.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+        <!--<div class="frame">
+            <div class="left">
+                <img class="post" src="@("~/img/"+Model.Post.PostURL)" asp-append-version="true" />
+            </div>
+            <div class="right">
+                <div class="profile-title" >
+                    <div class="profile-left">
+                        <div class="image">
+                            <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" width="45" height="45" />
+                        </div>
+                        <div class="details">
+                            <a asp-action="Details" asp-route-id="@Model.Profile.Id" class="username" style="text-decoration:none;">@Model.User.UserName</a>
+                        </div>
+                    </div>
+                    <div class="border"></div>
+                    <br />
+                    <div class="profile-left">
+                        <div class="image">
+                            <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" width="45" height="45" />
+                        </div>
+                        <div class="details">
+                            <a asp-action="Details" asp-route-id="@Model.Profile.Id" class="username" style="text-decoration:none;">@Model.User.UserName &nbsp;&nbsp;&nbsp; </a>
+                            <p class="name-surname">@Model.Post.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+</body>
+</html>
+
+

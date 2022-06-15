@@ -1,0 +1,157 @@
+﻿@model mahaLAnd.Models.MyModel
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewData["Title"] = "Feed";
+}
+
+<!--<p><a asp-action="Create">Create New</a></p>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MahaLAnd</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="~/css/feed.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+<body>
+    <div class="insta">
+        <header>
+            <div class="logo">
+                <a asp-controller="Home" asp-action="Index"><img src="~/img/mahaLAnd.jpg" alt="mahaLAnd" /></a>
+            </div>
+            @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+            {
+                <div class="search-box">
+                    <!--<a asp-controller="Home" asp-action="Search" asp-route-id="@Model.SearchedUser"><i class="fa-solid fa-magnifying-glass" style="color:gray"></i></a>-->
+                    <i class="fa-solid fa-magnifying-glass" style="color:gray"></i>
+                    <input type="search" name="SearchedUser" placeholder="Search" />
+                </div>
+            }
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-house"></i></a>
+                    </li>
+                    <li>
+                        <!--<input type="file" name="photo" id="addPhotoInput" />-->
+                        <!--<input asp-for="@Model." accept="image/*" />
+                        <label for="addPhotoInput">
+                            <i class="add-photo fa-solid fa-square-plus"></i>
+                        </label>-->
+                        <a asp-controller="Post" asp-action="Create"><i class="fa-solid fa-square-plus"></i></a>
+                    </li>
+                    <li>
+                        <a asp-controller="Notification" asp-action="Index"><i class="fa-solid fa-heart"></i></a>
+                    </li>
+                    <li>
+                        <a asp-action="Details" asp-route-id="@Model.Profile.Id"><img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true"></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            <div class="left-side">
+                <!--<div class="story">
+
+                </div>-->
+                @foreach(var item in Model.Feed)
+                {
+                    <div class="posts">
+                        <!--foreach-->
+                        <div class="post-title">
+                            <div class="post-left">
+                                <div class="image">
+                                    <img src="@("~/img/"+item.Item2.ProfilePhoto)" asp-append-version="true" width="32" height="32" />
+                                </div>
+                                <div class="details">
+                                    <a asp-action="Details" asp-route-id="@item.Item2.Id" class="name" style="text-decoration:none; color:black">@item.Item1.UserName</a>
+                                </div>
+                            </div>
+                            <div class="post-right">
+                                <!--<i class="fas fa-ellipsis-h"></i>-->
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Item3.Id" class="item">
+                                <img class="post" src="@("~/img/"+item.Item3.PostURL)" asp-append-version="true" height="600" width="600" />
+                            </a>
+                        </div>
+                        <div class="post-footer">
+                            @using (Html.BeginForm("CreateLike1", "Notification", FormMethod.Post))
+                            {
+                                @Html.Hidden("PostId", item.Item3.Id)
+                                @Html.Hidden("UserId", Model.User.Id)
+                                <div class="wrapper">
+                                    <button class="heart" style="font-size:22px;"><i class="far fa-heart"></i></button>
+                                </div>
+                            }
+                        </div>
+                        <div class="post-footer-content">
+                            <a asp-controller="Post" asp-action="Likes" asp-route-id="@item.Item3.Id" class="likes" style="text-decoration:none; color:black;">@item.Item4 likes</a>
+                            <p class="name" style="text-decoration:none; color:black">@item.Item1.UserName</p>
+                            <p class="posting-time">@item.Item3.Date.Day.@item.Item3.Date.Month.@item.Item3.Date.Year.</p>
+                        </div>
+                        @using (Html.BeginForm("CreateComment", "Notification", FormMethod.Post))
+                        {
+                            @Html.Hidden("PostId", item.Item3.Id)
+                            @Html.Hidden("UserId", Model.User.Id)
+                            <div class="add-comment">
+                                <div class="left-side">
+                                    <i class="far fa-smile-beam"></i>
+                                    <input type="text" name="Comment" style="background-color:#fafafa; color:black;" placeholder="Add a comment..." />
+                                </div>
+                                <div class="right-sidee">
+                                    <a asp-controller="Notification" asp-action="CreateComment" style="text-decoration:none;">Post</a>
+                                </div>
+                            </div>
+                        }
+
+                        <!--<div class="post-footer">
+                            <div class="like-comment">
+                                <i class="far fa-heart"></i>
+                                <i class="far fa-comment"></i>
+                            </div>
+                        </div>
+                        <div class="post-footer-content">
+                            <p class="likes">15 likes</p>
+                            <p class="name">esma</p>
+                            <p class="comments">100 comments</p>
+                            <p class="posting-time">10 hours</p>
+                        </div>
+                        <div class="add-comment">
+                            <div class="left-side">
+                                <i class="far fa-smile-beam"></i>
+                                <input type="text" placeholder="Add a comment..." />
+                            </div>
+                            <div class="right-sidee">
+                                <p>Post</p>
+                            </div>
+                        </div>-->
+                    </div>
+                }
+            </div>
+            <div class="right-side">
+                <div class="profile-title" >
+                    <div class="profile-left">
+                        <div class="image">
+                            <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" width="56" height="56" />
+                        </div>
+                        <div class="details">
+                            <a asp-action="Details" asp-route-id="@Model.Profile.Id" class="username" style="text-decoration:none;">@Model.User.UserName</a>
+                            <p class="name-surname">@Model.User.Name @Model.User.Surname</p>
+                        </div>
+                    </div>
+                    <div class="profile-right">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+

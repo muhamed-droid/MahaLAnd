@@ -1,0 +1,23 @@
+﻿@page
+@model DeleteAccountModel
+@{
+    ViewData["Title"] = "Delete Account";
+    ViewData["ActivePage"] = ManageNavPages.DeleteAccount;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-md-8">
+        <form method="post">
+            <p style="font-size:20px">Are you sure you want to delete your account?</p>
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <p style="font-size:13px; color:grey">*if you press this button your account will be deleted soon</p>
+        </form>
+    </div>
+</div>
+<br />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,174 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 18%;
+    border-block: 1px solid rgba(219,219,219,1);
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+    header .logo {
+        height: 35px;
+    }
+
+        header .logo img {
+            height: 100%;
+            object-fit: contain;
+        }
+
+    header .search-box {
+        width: 300px;
+        background-color: rgb(240,240,240,1);
+        padding: 3px 16px;
+        align-items: center;
+        border-radius: 8px;
+    }
+
+        header .search-box input {
+            height: 30px;
+            border: none;
+            outline: none;
+            background-color: rgb(240,240,240,1);
+            padding-left: 10px;
+            font-size: 15px;
+            color: #8e8e8e;
+        }
+
+    header nav ul {
+        list-style: none;
+        display: flex;
+    }
+
+        header nav ul li {
+            margin-right: 20px;
+            padding-left: 7px;
+            margin-top: 5px;
+        }
+
+            header nav ul li:last-child {
+                margin-right: 0;
+            }
+
+            header nav ul li a img {
+                clip-path: circle();
+                margin-top: -2px;
+                margin-right: 22px;
+                height: 25px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            header nav ul li a i {
+                font-size: 22px;
+                color: rgba(38,38,38,1);
+            }
+
+section {
+    padding: 30px 18%;
+    background-color: #fafafa;
+    display: flex;
+}
+
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  font-family: "Roboto", sans-serif;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.xxx {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* clears the ‘X’ from Internet Explorer */
+input[type=search]::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input[type=search]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+/* clears the ‘X’ from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}

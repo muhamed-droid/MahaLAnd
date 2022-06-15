@@ -1,0 +1,76 @@
+﻿@model mahaLAnd.Models.Post
+
+@{
+    ViewData["Title"] = "Create post";
+}
+<br />
+<h1>Create a new post</h1>
+<head>
+    <title>MahaLAnd</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="~/css/post.css">
+</head>
+
+<hr />
+<body style="background-color:#fafafa">
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div  asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <br />
+            <div class="form-group">
+                <label asp-for="PostFile" class="control-label">Profile photo</label>
+                <input asp-for="PostFile" accept="image/*" />
+                    <!--<input asp-for="ProfilePhotoFile" class="custom-file-input" id="ProfileP" />-->
+                <!--<div class="custom-file">
+                    <label class="custom-file-label" for "ProfilePhotoFile">Upload image</label>
+                </div>-->
+                <span asp-validation-for="PostFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PostURL" class="control-label"></label>
+                <input asp-for="PostURL" class="form-control" style="visibility: hidden"/>
+                <span asp-validation-for="PostURL" class="text-danger"></span>
+                <div style="padding: 1rem; display: grid; grid-template-columns: 50% 50%">
+                    <div id="results">Slika će se prikazati ovdje...</div>
+                    <div style="margin-left: 20rem">
+                        <div id="my_camera"></div>
+                        <script type="text/javascript" src="~/js/webcam.min.js"></script>
+                        <script>
+                            Webcam.set({
+                                width: 320,
+                                height: 240,
+                                image_format: 'jpeg',
+                                jpeg_quality: 90
+                            });
+                            Webcam.attach( '#my_camera' );
+                        </script>
+                        <script>
+                            function take_snapshot() {
+                                Webcam.snap(function(data_uri)
+                                {
+                                    document.getElementById('results').innerHTML = '<img src="' + data_uri + '"/>';
+                                    document.getElementById('PostURL').value = data_uri;
+                                });
+                            }
+                        </script>
+                        <input type=button id="takeshot" class="btn btn-primary" value="Take a photo" onClick="take_snapshot()">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

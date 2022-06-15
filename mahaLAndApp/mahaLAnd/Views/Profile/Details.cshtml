@@ -1,0 +1,123 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model mahaLAnd.Models.MyModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Profile";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MahaLAnd</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="~/css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="insta">
+        <header>
+            <div class="logo">
+                <a asp-action="Index" asp-route-id="@Model.Profile.Id"><img src="~/img/mahaLAnd.jpg" alt="mahaLAnd" /></a>
+            </div>
+            @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+            {
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass" style="color:gray"></i>
+                    <input type="search" name="SearchedUser" placeholder="Search" />
+                </div>
+            }
+            <nav>
+                <ul>
+                    <li>
+                        <a asp-action="Index" asp-route-id="@Model.Profile.Id"><i class="fa-solid fa-house"></i></a>
+                    </li>
+                    <li>
+                        <!--<input type="file" name="photo" id="addPhotoInput" />
+                        <label for="addPhotoInput">
+                            <i class="add-photo fa-solid fa-square-plus"></i>
+                        </label>-->
+                        <a asp-controller="Post" asp-action="Create"><i class="fa-solid fa-square-plus"></i></a>
+                    </li>
+                    <li>
+                        <a asp-controller="Notification" asp-action="Index"><i class="fa-solid fa-heart"></i></a>
+                    </li>
+                    <li>
+                        <a asp-action="Details" asp-route-id="@Model.LoggedProfile.Id"><img src="@("~/img/"+Model.LoggedProfile.ProfilePhoto)" asp-append-version="true"></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <div class="container">
+            <section class="bio">
+                <div class="profile-photo">
+                   <!--<img src="@Model.Profile.ProfilePhoto" alt="profile-photo"/>-->
+                   <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" />
+                </div>
+                <div class="profile-info">
+                    <div class="username-edit">
+                        <p class="username">@Model.User.UserName</p>
+                        <!--<button>follow</button>-->
+                        @if(Model.User.Id.Equals(Model.LoggedUser.Id))
+                        {
+                            <button type="button"><a asp-action="Edit" asp-route-id="@Model.Profile.Id" style="text-decoration:none; color:dimgrey;">Edit profile</a></button>   
+                        }
+                        @if(Model.Profile.ProfileType == ProfileType.PROFESSIONAL)
+                        {
+                            <button type="button" style="background-color:dimgrey;"><a asp-action="Contact" asp-route-id="@Model.User.Id" style="text-decoration:none; color:white;">Contact</a></button>   
+                        }
+                        @if(Model.User.Id.Equals(Model.LoggedUser.Id))
+                        {
+                            <a href="/Identity/Account/Manage"><i class="gear fa-solid fa-gear"></i></a>
+                            <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button  type="submit" style="background-color:dodgerblue; text-decoration:none; color:white;" class="nav-link btn btn-link text-dark">Logout</button>
+                            </form>
+                        }
+                        @if(!Model.User.Id.Equals(Model.LoggedUser.Id))
+                        {
+                            @if(Model.Followers.Select(f => f.Id).Contains(Model.LoggedUser.Id))
+                            {
+                                @using (Html.BeginForm("Create", "Follow", FormMethod.Post))
+                                {
+                                    @Html.Hidden("FollowerId", Model.LoggedUser.Id)
+                                    @Html.Hidden("FollowingId", Model.User.Id)
+                                    @Html.Hidden("Follow", 0)
+                                    @Html.Hidden("ProfileId", Model.Profile.Id)
+                                    <button type="submit" style="text-decoration:none;"><p style="color:dimgray">Following</p></button>     
+                                }
+                            }
+                            else 
+                            {
+                                @using (Html.BeginForm("Create", "Follow", FormMethod.Post))
+                                {
+                                    @Html.Hidden("FollowerId", Model.LoggedUser.Id)
+                                    @Html.Hidden("FollowingId", Model.User.Id)
+                                    @Html.Hidden("Follow", 1)
+                                    @Html.Hidden("ProfileId", Model.Profile.Id)
+                                    <button type="submit" style="background-color:dodgerblue;"><p style="color:white">Follow</p></button>   
+                                }
+                            }
+                        }
+                    </div>
+                    <div class="profile-description">
+                        <a asp-action="" asp-route-id="" style="text-decoration:none; color: black;">Posts: <b>@Model.Posts.Count</b></a>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        <a asp-controller="Follow" asp-action="Followers" asp-route-id="@Model.Profile.Id" style="text-decoration:none; color: black;">Followers: <b>@Model.Followers.Count</b></a>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        <a asp-controller="Follow" asp-action="Following" asp-route-id="@Model.Profile.Id" style="text-decoration:none; color: black;">Following: <b>@Model.Following.Count</b></a>
+                    </div>
+                    <br />
+                    <p>@Model.Profile.Description</p>
+                </div>
+            </section>
+            <section class="gallery">
+                @foreach (var item in Model.Posts) {
+                    <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="item">
+                        <img src="@("~/img/"+item.PostURL)" asp-append-version="true" />
+                    </a>
+                }
+            </section>
+        </div>
+    </div>
+</body>
+</html>

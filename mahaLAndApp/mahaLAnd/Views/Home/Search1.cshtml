@@ -1,0 +1,69 @@
+﻿@model mahaLAnd.Models.MyModel
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+@{
+    Layout = null;
+}
+
+<!--<p><a asp-action="Create">Create New</a></p>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MahaLAnd</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="~/css/users.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+<body>
+    <div class="insta">
+        <header>
+            <div class="logo">
+                <a asp-controller="Home" asp-action="Index" asp-route-id="@Model.LoggedProfile.Id"><img src="~/img/mahaLAnd.jpg" alt="mahaLAnd" /></a>
+            </div>
+            @using (Html.BeginForm("Search1", "Home", FormMethod.Get))
+            {
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass" style="color:gray"></i>
+                    <input type="search" name="SearchedUser" placeholder="Search" />
+                </div>
+            }
+            <nav>
+                <ul>
+                    <li>
+                    </li>
+                    <li>
+                    </li>
+                    <li>
+                    </li>
+                    <li>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            @foreach (var item in Model.PotentionalUsers)
+            {
+                <div class="right-side">
+                    <div class="profile-title" >
+                        <div class="profile-left">
+                            <div class="image">
+                                <img src="@("~/img/"+item.Item2.ProfilePhoto)" asp-append-version="true" width="45" height="45" />
+                            </div>
+                            <div class="details">
+                                <a asp-controller="Profile" asp-action="Details1" asp-route-id="@item.Item2.Id" class="username" style="text-decoration:none;">@item.Item1.UserName</a>
+                                <p class="name-surname">@item.Item1.Name @item.Item1.Surname</p>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            }
+        </section>
+    </div>
+</body>
+</html>
+
+

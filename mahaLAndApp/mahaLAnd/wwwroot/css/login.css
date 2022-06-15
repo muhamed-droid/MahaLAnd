@@ -1,0 +1,151 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background: #fafafa;
+    font-size: 14px;
+}
+
+/*header {
+    display: flex;
+    align-items: center;
+    padding: 10px 18%;
+    border-block: 1px solid rgba(219,219,219,1);
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+    header .logo {
+        height: 35px;
+        margin-right: 315px;
+    }
+
+        header .logo img {
+            height: 100%;
+            object-fit: contain;
+        }
+
+    header .search-box {
+        width: 300px;
+        background-color: rgb(240,240,240,1);
+        padding: 3px 16px;
+        align-items: center;
+        border-radius: 8px;
+    }
+
+        header .search-box input {
+            height: 30px;
+            border: none;
+            outline: none;
+            background-color: rgb(240,240,240,1);
+            padding-left: 10px;
+            font-size: 15px;
+            color: #8e8e8e;
+        }
+*/
+.wrapper .header {
+    max-width: 370px;
+    width: 100%;
+    height: auto;
+    margin: 50px auto;
+}
+
+    .wrapper .header .top,
+    .wrapper .signup {
+        background: #fff;
+        border: 1px solid #e6e6e6;
+        border-radius: 1px;
+        padding: 40px 40px 20px;
+    }
+
+    .wrapper .header .logoo img {
+        display: block;
+        margin: 0 auto 35px;
+    }
+
+    .wrapper .header .form .input_field {
+        margin-bottom: 5px;
+    }
+
+        .wrapper .header .form .input_field .input {
+            width: 100%;
+            background: #fafafa;
+            border: 1px solid #efefef;
+            font-size: 12px;
+            border-radius: 3px;
+            color: #262626;
+            padding: 10px;
+        }
+
+            .wrapper .header .form .input_field .input:focus {
+                border: 1px solid #b2b2b2;
+            }
+
+    .wrapper .header .form .btn {
+        margin: 20px 0 0;
+        background-color: #3897f0;
+        border: 1px solid #3897f0;
+        border-radius: 4px;
+        text-align: center;
+        padding: 5px;
+        width: 100%;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .wrapper .header .form .btn a {
+            color: #fff;
+            display: block;
+        }
+
+    .wrapper .header .or {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 15px;
+        margin: 20px 0;
+    }
+
+        .wrapper .header .or .line {
+            width: 120px;
+            height: 2px;
+            background: #efefef
+        }
+
+        .wrapper .header .or p {
+            margin-top: 15px;
+            color: #999;
+            font-size: 12px;
+        }
+
+.wrapper .dif .forgot {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+    .wrapper .dif .forgot a {
+        color: #003569;
+    }
+
+.wrapper .signup {
+    margin: 10px 0 10px;
+    padding: 25px 40px;
+    text-align: center;
+    color: #262626;
+    height: 75px;
+}
+
+    .wrapper .signup a {
+        color: #3897f0;
+    }

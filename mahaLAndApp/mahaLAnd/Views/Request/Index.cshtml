@@ -1,0 +1,31 @@
+﻿@model IEnumerable<mahaLAnd.Models.Request>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<title>MahaLAnd</title>
+
+<br />
+<h1>Requests</h1>
+<br />
+
+
+@foreach (var item in Model) {
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(item => item.UserId)
+        </dt>
+        <dd class = "col-sm-5">
+            @item.UserId
+        </dd>
+        <dd class = "col-sm-5">
+            @using (Html.BeginForm("Delete", "Request", FormMethod.Post))
+            {
+                @Html.Hidden("Id", item.Id)
+                @Html.Hidden("UserId", item.UserId)
+                <button type="submit" class="btn btn-primary">Accept</button>
+            }
+        </dd>
+    </dl>
+    <hr />
+}
