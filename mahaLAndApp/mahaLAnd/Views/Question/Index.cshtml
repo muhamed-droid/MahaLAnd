@@ -7,44 +7,6 @@
 
 <br />
 <h1>Help Center</h1>
-
-<!--<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Text)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Answer)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Answer)
-            </td>
-            <td>
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>-->
-<!--@foreach (var item in Model) {
-        <br />
-        <p>@item.Text</p>
-        <div class="form-group">
-            <input asp-for="@item.Answer" class="form-control" readonly="readonly" />
-        </div>
-        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-        <br />
-}-->
 <br />
 @foreach (var item in Model) {
         <dl class="row">

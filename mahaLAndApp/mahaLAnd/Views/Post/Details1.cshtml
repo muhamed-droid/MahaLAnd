@@ -8,7 +8,6 @@
     Layout = null;
 }
 
-<!--<p><a asp-action="Create">Create New</a></p>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,11 +44,7 @@
         </header>
     <section>
             <div class="left-side">
-                <!--<div class="story">
-
-                </div>-->
                 <div class="posts">
-                    <!--foreach-->
                     <div class="post-title">
                         <div class="post-left">
                         </div>
@@ -95,34 +90,6 @@
                 }
             </div>
         </section>
-        <!--<div class="frame">
-            <div class="left">
-                <img class="post" src="@("~/img/"+Model.Post.PostURL)" asp-append-version="true" />
-            </div>
-            <div class="right">
-                <div class="profile-title" >
-                    <div class="profile-left">
-                        <div class="image">
-                            <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" width="45" height="45" />
-                        </div>
-                        <div class="details">
-                            <a asp-action="Details" asp-route-id="@Model.Profile.Id" class="username" style="text-decoration:none;">@Model.User.UserName</a>
-                        </div>
-                    </div>
-                    <div class="border"></div>
-                    <br />
-                    <div class="profile-left">
-                        <div class="image">
-                            <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" width="45" height="45" />
-                        </div>
-                        <div class="details">
-                            <a asp-action="Details" asp-route-id="@Model.Profile.Id" class="username" style="text-decoration:none;">@Model.User.UserName &nbsp;&nbsp;&nbsp; </a>
-                            <p class="name-surname">@Model.Post.Description</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
     </div>
 </body>
 </html>

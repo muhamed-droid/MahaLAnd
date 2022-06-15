@@ -106,7 +106,7 @@ namespace mahaLAnd.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new User { Email = Input.Email, Name = Input.Name, Surname = Input.Surname, UserName = Input.UserName, Age = Input.Age, Gender = Input.Gender  };
+                var user = new User { EmailConfirmed = true, Email = Input.Email, Name = Input.Name, Surname = Input.Surname, UserName = Input.UserName, Age = Input.Age, Gender = Input.Gender  };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -121,35 +121,9 @@ namespace mahaLAnd.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     _context.Add(new Profile { User = user, ProfilePhoto = "user.png" });
+                    await _userManager.AddToRoleAsync(user, "User");
                     await _context.SaveChangesAsync();
-
-                    /*MyModel model = new MyModel
-                    {
-                        User = user,
-                        Profile = _context.Profile.First(p => p.UserId.Equals(user.Id))
-                    };
-                    TempData.Put("myModel", model);
-                    return RedirectToAction("Index1", "Profile");*/
                     return RedirectToPage("Login");
-                    //return RedirectToAction("Index", "Profile", new { id = _context.Profile.First(p => p.UserId.Equals(user.Id)).Id });
-
-                    //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", profile.UserId);
-                    //return View(profile);
-
-                    /*await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }*/
-                    //return await new ProfileController(_context).Create(new Profile{ User = user });
-                    //return RedirectToAction("Create", "Profile", new { User = user });
                 }
                 foreach (var error in result.Errors)
                 {

@@ -8,7 +8,6 @@
     Layout = null;
 }
 
-<!--<p><a asp-action="Create">Create New</a></p>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,10 +35,6 @@
                         <a asp-controller="Profile" asp-action="Index" asp-route-id="@Model.Profile.Id"><i class="fa-solid fa-house"></i></a>
                     </li>
                     <li>
-                        <!--<input type="file" name="photo" id="addPhotoInput" />
-                        <label for="addPhotoInput">
-                            <i class="add-photo fa-solid fa-square-plus"></i>
-                        </label>-->
                         <a asp-controller="Post" asp-action="Create"><i class="fa-solid fa-square-plus"></i></a>
                     </li>
                     <li>
@@ -51,31 +46,6 @@
                 </ul>
             </nav>
         </header>
-    <!--<section>
-        <div class="left-side">
-            <div class="posts">
-                <div class="image-container">
-                        <img class="img" src='https://source.unsplash.com/400x250' alt="test" />
-                </div>
-            </div>
-        </div>
-        <div class="right-side">
-            <div class="profile-title" >
-                <div class="profile-left">
-                    <div class="image">
-                        <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" width="56" height="56" />
-                    </div>
-                    <div class="details">
-                        <a asp-action="Details" asp-route-id="@Model.Profile.Id" class="username" style="text-decoration:none;">@Model.User.UserName</a>
-                        <p class="name-surname">@Model.User.Name @Model.User.Surname</p>
-                    </div>
-                </div>
-                <div class="profile-right">
-
-                </div>
-            </div>
-        </div>
-    </section>-->
     <section>
             <div class="left-side">
                 <div class="posts">
@@ -101,19 +71,7 @@
                             <div class="wrapper">
                                 <button class="heart" style="font-size:22px;"><i class="far fa-heart"></i></button>
                             </div>
-                            <!--<div class="add-comment">
-                                <div class="left-side">
-                                    <i class="far fa-smile-beam"></i>
-                                    <input type="text" name="Comment" style="background-color:#fafafa; color:black;" placeholder="Add a comment..." />
-                                </div>
-                                <div class="right-sidee">
-                                    <a asp-controller="Notification" asp-action="CreateComment" style="text-decoration:none;">Post</a>
-                                </div>
-                            </div>-->
                         }
-                        <!--<div class="wrapper">
-                            <a asp-action="Details" class="heart" style="font-size:22px;"><i class="far fa-heart"></i></a>
-                        </div>-->
                         @if(Model.Profile.ProfileType == ProfileType.PROFESSIONAL && Model.User.Id.Equals(Model.LoggedUser.Id))
                         {
                             <div class="right-sidee">
@@ -126,15 +84,6 @@
                         <p class="name">@Model.User.UserName</p>
                         <p class="posting-time">@Model.Post.Date.Day.@Model.Post.Date.Month.@Model.Post.Date.Year.</p>
                     </div>
-                    <!--<div class="add-comment">
-                        <div class="left-side">
-                            <i class="far fa-smile-beam"></i>
-                            <input type="text" style="background-color:#fafafa; color:black;" placeholder="Add a comment..." />
-                        </div>
-                        <div class="right-sidee">
-                            <a asp-action="Details" style="text-decoration:none;">Post</a>
-                        </div>
-                    </div>-->
                     @using (Html.BeginForm("CreateComment", "Notification", FormMethod.Post))
                     {
                         @Html.Hidden("PostId", Model.Post.Id)
@@ -194,34 +143,6 @@
                 }
             </div>
         </section>
-        <!--<div class="frame">
-            <div class="left">
-                <img class="post" src="@("~/img/"+Model.Post.PostURL)" asp-append-version="true" />
-            </div>
-            <div class="right">
-                <div class="profile-title" >
-                    <div class="profile-left">
-                        <div class="image">
-                            <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" width="45" height="45" />
-                        </div>
-                        <div class="details">
-                            <a asp-action="Details" asp-route-id="@Model.Profile.Id" class="username" style="text-decoration:none;">@Model.User.UserName</a>
-                        </div>
-                    </div>
-                    <div class="border"></div>
-                    <br />
-                    <div class="profile-left">
-                        <div class="image">
-                            <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" width="45" height="45" />
-                        </div>
-                        <div class="details">
-                            <a asp-action="Details" asp-route-id="@Model.Profile.Id" class="username" style="text-decoration:none;">@Model.User.UserName &nbsp;&nbsp;&nbsp; </a>
-                            <p class="name-surname">@Model.Post.Description</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
     </div>
 </body>
 </html>

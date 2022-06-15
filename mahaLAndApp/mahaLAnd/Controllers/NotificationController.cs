@@ -25,6 +25,7 @@ namespace mahaLAnd.Controllers
         }
 
         // GET: Notification
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Index()
         {
             var loggedUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -37,14 +38,6 @@ namespace mahaLAnd.Controllers
             }
             var notifs = _context.Notification.ToList().FindAll(n => postsId.Contains(n.PostId));
             var notifications = new List<Tuple<Notification, User, Profile>>();
-            /*notifs.Reverse();
-            foreach (var notification in notifs)
-            {
-                var user = _context.Users.First(u => u.Id.Equals(notification.UserId));
-                var profile = _context.Profile.First(p => p.UserId.Equals(notification.UserId));
-                if(!user.Id.Equals(loggedUser.Id)) 
-                    notifications.Add(new Tuple<Notification, User, Profile>(notification, user, profile));
-            }*/
             for (int i = notifs.Count - 1; i >= 0; i--)
             {
                 var user = _context.Users.First(u => u.Id.Equals(notifs[i].UserId));
@@ -52,36 +45,7 @@ namespace mahaLAnd.Controllers
                 if (!user.Id.Equals(loggedUser.Id))
                     notifications.Add(new Tuple<Notification, User, Profile>(notifs[i], user, profile));
             }
-            //var applicationDbContext = _context.Notification.Include(n => n.Post).Include(n => n.User);
             return View(new MyModel { LoggedUser = loggedUser, LoggedProfile = loggedProfile, Notifications = notifications } );
-        }
-
-        // GET: Notification/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var notification = await _context.Notification
-                .Include(n => n.Post)
-                .Include(n => n.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (notification == null)
-            {
-                return NotFound();
-            }
-
-            return View(notification);
-        }
-
-        // GET: Notification/Create
-        public IActionResult Create()
-        {
-            ViewData["PostId"] = new SelectList(_context.Post, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
         }
 
         // POST: Notification/Create
@@ -103,8 +67,6 @@ namespace mahaLAnd.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Details", "Post", new { id = notification.PostId } );
             }
-            //ViewData["PostId"] = new SelectList(_context.Post, "Id", "Id", notification.PostId);
-            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", notification.UserId);
             return View();
         }
 
@@ -128,8 +90,6 @@ namespace mahaLAnd.Controllers
                 }
                 return RedirectToAction("Details", "Post", new { id = PostId });
             }
-            //ViewData["PostId"] = new SelectList(_context.Post, "Id", "Id", notification.PostId);
-            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", notification.UserId);
             return View();
         }
 
@@ -144,7 +104,6 @@ namespace mahaLAnd.Controllers
 
             if (ModelState.IsValid)
             {
-                //var loggedUser = await _userManager.GetUserAsync(HttpContext.User);
                 var loggedProfile = _context.Profile.First(p => p.UserId.Equals(UserId));
                 var exist = new List<Notification>();
                 exist = _context.Notification.ToList().FindAll(n => n.UserId.Equals(UserId) && n.Type == NotificationType.LIKE && n.PostId.Equals(PostId));
@@ -155,104 +114,7 @@ namespace mahaLAnd.Controllers
                 }
                 return RedirectToAction("Index", "Profile", new { id = loggedProfile.Id });
             }
-            //ViewData["PostId"] = new SelectList(_context.Post, "Id", "Id", notification.PostId);
-            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", notification.UserId);
             return View();
-        }
-
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateFollow(string UserId)
-        {
-            var notification = new Notification();
-            notification.Type = NotificationType.FOLLOW;
-            notification.UserId = UserId;
-
-            if (ModelState.IsValid)
-            {
-                _context.Add(notification);
-                await _context.SaveChangesAsync();
-                var profile = _context.Profile.First(p => p.UserId.Equals(UserId));
-                return RedirectToAction("Details", "Profile", new { id = profile.Id });
-            }
-            //ViewData["PostId"] = new SelectList(_context.Post, "Id", "Id", notification.PostId);
-            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", notification.UserId);
-            return View();
-        }*/
-
-        // GET: Notification/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var notification = await _context.Notification.FindAsync(id);
-            if (notification == null)
-            {
-                return NotFound();
-            }
-            ViewData["PostId"] = new SelectList(_context.Post, "Id", "Id", notification.PostId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", notification.UserId);
-            return View(notification);
-        }
-
-        // POST: Notification/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,PostId,Type,Comment")] Notification notification)
-        {
-            if (id != notification.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(notification);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!NotificationExists(notification.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["PostId"] = new SelectList(_context.Post, "Id", "Id", notification.PostId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", notification.UserId);
-            return View(notification);
-        }
-
-        // GET: Notification/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var notification = await _context.Notification
-                .Include(n => n.Post)
-                .Include(n => n.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (notification == null)
-            {
-                return NotFound();
-            }
-
-            return View(notification);
         }
 
         // POST: Notification/Delete/5

@@ -1,5 +1,6 @@
 ﻿using mahaLAnd.Data;
 using mahaLAnd.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,11 +17,6 @@ namespace mahaLAnd.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
-
-        /*public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }*/
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<User> userManager)
         {
@@ -45,6 +41,7 @@ namespace mahaLAnd.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Search(string SearchedUser)
         {
             if (SearchedUser == null)
@@ -61,7 +58,6 @@ namespace mahaLAnd.Controllers
             var loggedProfile = _context.Profile.First(p => p.UserId.Equals(loggedUser.Id));
             return View(new MyModel { LoggedUser = loggedUser, LoggedProfile = loggedProfile, PotentionalUsers = users }); ;
         }
-
 
         public async Task<IActionResult> Search1(string SearchedUser)
         {

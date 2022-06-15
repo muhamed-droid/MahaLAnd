@@ -27,14 +27,8 @@ namespace mahaLAnd.Controllers
             _userManager = userManager;
         }
 
-        // GET: Post
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Post.Include(p => p.Profile);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
         // GET: Post/Details/5
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -54,17 +48,8 @@ namespace mahaLAnd.Controllers
             var loggedProfile = _context.Profile.First(p => p.UserId.Equals(loggedUser.Id));
             var profile = _context.Profile.First(p => p.Id == post.ProfileId);
             var user = _context.Users.First(u => u.Id.Equals(profile.UserId));
-            //List<Post> posts = _context.Post.ToList().FindAll(p => p.ProfileId == profile.Id);
-            //posts.Reverse();
             var likesNotification = _context.Notification.ToList().FindAll(n => n.PostId == post.Id && n.Type == NotificationType.LIKE);
             var commentsNotification = _context.Notification.ToList().FindAll(n => n.PostId == post.Id && n.Type == NotificationType.COMMENT);
-            /*var likes = new List<Tuple<User, Profile>>();
-            foreach (var like in likesNotification)
-            {
-                var user1 = _context.Users.First(u => u.Id.Equals(like.UserId));
-                var profile1 = _context.Profile.First(p => p.UserId.Equals(like.UserId));
-                likes.Add(new Tuple<User, Profile>(user1, profile1));
-            }*/
             var comments = new List<Tuple<User, Profile, string>>();
             foreach (var comment in commentsNotification)
             {
@@ -93,13 +78,6 @@ namespace mahaLAnd.Controllers
             var user = _context.Users.First(u => u.Id.Equals(profile.UserId));
             var likesNotification = _context.Notification.ToList().FindAll(n => n.PostId == post.Id && n.Type == NotificationType.LIKE);
             var commentsNotification = _context.Notification.ToList().FindAll(n => n.PostId == post.Id && n.Type == NotificationType.COMMENT);
-            /*var likes = new List<Tuple<User, Profile>>();
-            foreach (var like in likesNotification)
-            {
-                var user1 = _context.Users.First(u => u.Id.Equals(like.UserId));
-                var profile1 = _context.Profile.First(p => p.UserId.Equals(like.UserId));
-                likes.Add(new Tuple<User, Profile>(user1, profile1));
-            }*/
             var comments = new List<Tuple<User, Profile, string>>();
             foreach (var comment in commentsNotification)
             {
@@ -111,6 +89,7 @@ namespace mahaLAnd.Controllers
         }
 
         // GET: Post/Create
+        [Authorize(Roles = "User")]
         public IActionResult Create()
         {
             ViewData["ProfileId"] = new SelectList(_context.Profile, "Id", "Id");
@@ -133,7 +112,6 @@ namespace mahaLAnd.Controllers
                 string fileName = Path.GetFileNameWithoutExtension(post.PostFile.FileName);
                 string extension = Path.GetExtension(post.PostFile.FileName);
                 post.PostURL = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                //post.PostURL = fileName;
                 string path = Path.Combine(wwwRoothPath + "/img/", fileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
@@ -148,6 +126,7 @@ namespace mahaLAnd.Controllers
         }
 
         // GET: Post/Edit/5
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -205,6 +184,7 @@ namespace mahaLAnd.Controllers
         }
 
         // GET: Post/Delete/5
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -239,6 +219,7 @@ namespace mahaLAnd.Controllers
             return _context.Post.Any(e => e.Id == id);
         }
 
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Statistics(int? id)
         {
             if (id == null)
@@ -264,6 +245,7 @@ namespace mahaLAnd.Controllers
             return View(new MyModel { Profile = profile, Post = post, Statistics = statistics });
         }
 
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Likes(int? id)
         {
             if (id == null)

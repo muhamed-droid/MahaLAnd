@@ -26,6 +26,7 @@ namespace mahaLAnd.Controllers
         }
 
         // GET: Question
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Index()
         {
             var loggedUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -33,36 +34,11 @@ namespace mahaLAnd.Controllers
             return View(applicationDbContext);
         }
 
+        [Authorize(Roles = "UserSupport")]
         public async Task<IActionResult> IndexEmployee()
         {
             var applicationDbContext = _context.Question.Include(q => q.User);
             return View(await applicationDbContext.ToListAsync());
-        }
-
-        // GET: Question/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var question = await _context.Question
-                .Include(q => q.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (question == null)
-            {
-                return NotFound();
-            }
-
-            return View(question);
-        }
-
-        // GET: Question/Create
-        public IActionResult Create()
-        {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
         }
 
         // POST: Question/Create
@@ -77,23 +53,6 @@ namespace mahaLAnd.Controllers
                 _context.Add(question);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", question.UserId);
-            return View(question);
-        }
-
-        // GET: Question/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var question = await _context.Question.FindAsync(id);
-            if (question == null)
-            {
-                return NotFound();
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", question.UserId);
             return View(question);
@@ -127,11 +86,11 @@ namespace mahaLAnd.Controllers
                 }
                 return RedirectToAction("IndexEmployee");
             }
-            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", question.UserId);
             return View();
         }
 
         // GET: Question/Delete/5
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -150,6 +109,7 @@ namespace mahaLAnd.Controllers
             return View(question);
         }
 
+        [Authorize(Roles = "UserSupport")]
         public async Task<IActionResult> DeleteEmployee(int? id)
         {
             if (id == null)

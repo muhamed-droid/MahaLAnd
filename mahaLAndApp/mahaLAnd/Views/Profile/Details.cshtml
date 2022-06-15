@@ -33,10 +33,6 @@
                         <a asp-action="Index" asp-route-id="@Model.Profile.Id"><i class="fa-solid fa-house"></i></a>
                     </li>
                     <li>
-                        <!--<input type="file" name="photo" id="addPhotoInput" />
-                        <label for="addPhotoInput">
-                            <i class="add-photo fa-solid fa-square-plus"></i>
-                        </label>-->
                         <a asp-controller="Post" asp-action="Create"><i class="fa-solid fa-square-plus"></i></a>
                     </li>
                     <li>
@@ -51,13 +47,11 @@
         <div class="container">
             <section class="bio">
                 <div class="profile-photo">
-                   <!--<img src="@Model.Profile.ProfilePhoto" alt="profile-photo"/>-->
                    <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" />
                 </div>
                 <div class="profile-info">
                     <div class="username-edit">
                         <p class="username">@Model.User.UserName</p>
-                        <!--<button>follow</button>-->
                         @if(Model.User.Id.Equals(Model.LoggedUser.Id))
                         {
                             <button type="button"><a asp-action="Edit" asp-route-id="@Model.Profile.Id" style="text-decoration:none; color:dimgrey;">Edit profile</a></button>   

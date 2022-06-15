@@ -91,19 +91,14 @@ namespace mahaLAnd.Areas.Identity.Pages.Account
                 {
                     var user = _context.Users.First(x => x.UserName.Equals(Input.UserName));
                     _logger.LogInformation("User logged in.");
-                    //returnUrl ??= Url.Content("~/Profile/Index/" + _context.Profile.First(u => u.UserId == _context.Users.First(x => x.UserName == Input.UserName).Id).Id);
-                    //return await new ProfileController(_context).Index(_context.Profile.First(u => u.UserId.Equals(_context.Users.First(x => x.UserName.Equals(Input.UserName)).Id)).Id);
-                    //return LocalRedirect(returnUrl);
-                    //TempData["myModel"] = model;
 
-                    /*MyModel model = new MyModel();
-                    model.User = user;
-                    model.Profile = _context.Profile.First(p => p.UserId.Equals(user.Id));*/
-                    /*TempData.Put("myModel", model);
-                    return RedirectToAction("Index1", "Profile");*/
-
-                    return RedirectToAction("Index", "Profile", new { id = _context.Profile.First(p => p.UserId.Equals(user.Id)).Id } );
-                    //return RedirectToAction("Index", "Profile", new { model = new MyModel { User = user, Profile = _context.Profile.First(p => p.UserId.Equals(user.Id)) } });
+                    var role = _context.UserRoles.First(r => r.UserId.Equals(user.Id)).RoleId;
+                    if(role.Equals("3"))
+                        return RedirectToAction("Index", "Profile", new { id = _context.Profile.First(p => p.UserId.Equals(user.Id)).Id } );
+                    if(role.Equals("2"))
+                        return RedirectToAction("IndexEmployee", "Question");
+                    if(role.Equals("1"))
+                        return RedirectToAction("Index", "Request");
                 }
                 if (result.RequiresTwoFactor)
                 {

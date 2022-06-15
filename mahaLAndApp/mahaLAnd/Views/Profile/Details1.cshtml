@@ -43,13 +43,11 @@
         <div class="container">
             <section class="bio">
                 <div class="profile-photo">
-                   <!--<img src="@Model.Profile.ProfilePhoto" alt="profile-photo"/>-->
                    <img src="@("~/img/"+Model.Profile.ProfilePhoto)" asp-append-version="true" />
                 </div>
                 <div class="profile-info">
                     <div class="username-edit">
                         <p class="username">@Model.User.UserName</p>
-                        <!--<button>follow</button>-->
                     </div>
                     <div class="profile-description">
                         <p style="text-decoration:none; color: black;">Posts: <b>@Model.Posts.Count</b></p>

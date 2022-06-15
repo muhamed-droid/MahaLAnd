@@ -15,103 +15,62 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-	<!--
-		<header>
-        <div class="logo">
-			<a asp-action="Index"><img src="~/img/mahaLAnd.jpg" alt="mahaLAnd" /></a>
-            <img src="~/img/mahaLAnd.jpg" alt="mahaLAnd" />
-        </div>
-        <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="search" placeholder="Search" />
-        </div>
-    </header>
-	-->
-<!--
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
-</div>
--->
-
-<div class="wrapper">
-	<div class="header">
-		<div class="top">
-			<div class="logoo">
-				<img src="~/img/mahaLAnd.jpg" alt="mahaland" style="width: 230px;">
-			</div>
-			<div class="info">
-				<p>Sign up to see photos and videos from your friends.</p>
-			</div>
-			<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-				<div asp-validation-summary="All" class="text-danger"></div>
-				<div class="form">
-					<div class="input_field">
-						<input asp-for="Input.Email" placeholder="Email" class="input" />
-						<span asp-validation-for="Input.Email" class="text-danger"></span>
-					</div>
-					<div class="input_field">
-						<input asp-for="Input.Name" placeholder="Name" class="input" />
-						<span asp-validation-for="Input.Name" class="text-danger"></span>
-					</div>
-					<div class="input_field">
-						<input asp-for="Input.Surname" placeholder="Surname" class="input" />
-						<span asp-validation-for="Input.Surname" class="text-danger"></span>
-					</div>
-					<div class="input_field">
-						<input asp-for="Input.UserName" placeholder="Username" class="input" />
-						<span asp-validation-for="Input.UserName" class="text-danger"></span>
-					</div>
-					<div class="input_field">
-						<input asp-for="Input.Age" placeholder="Age" class="input" />
-						<span asp-validation-for="Input.Age" class="text-danger"></span>
-					</div>
-					<div class="input_field">
-						<select asp-for="Input.Gender" class="input" asp-items="Html.GetEnumSelectList<Gender>()"></select>
-						<span asp-validation-for="Input.Gender" class="text-danger"></span>
-					</div>
-					<div class="input_field">
-						<input asp-for="Input.Password" placeholder="Password" class="input" />
-						<span asp-validation-for="Input.Password" class="text-danger"></span>
-					</div>
-					<div class="input_field">
-						<input asp-for="Input.ConfirmPassword" placeholder="Confirm password" class="input" />
-						<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-					</div>
-					<!--<div class="btn">
-						<a href="#" style="text-decoration:none;">Sign Up</a>
-					</div>-->
-					<button type="submit" class="btn btn-primary">Sign up</button>
+	<div class="wrapper">
+		<div class="header">
+			<div class="top">
+				<div class="logoo">
+					<img src="~/img/mahaLAnd.jpg" alt="mahaland" style="width: 230px;">
 				</div>
-			</form>
-		</div>
-		<div class="login">
-            <p>Have an account? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" style="text-decoration:none;">Login</a></p>
+				<div class="info">
+					<p>Sign up to see photos and videos from your friends.</p>
+				</div>
+				<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+					<div asp-validation-summary="All" class="text-danger"></div>
+					<div class="form">
+						<div class="input_field">
+							<input asp-for="Input.Email" placeholder="Email" class="input" />
+							<span asp-validation-for="Input.Email" class="text-danger"></span>
+						</div>
+						<div class="input_field">
+							<input asp-for="Input.Name" placeholder="Name" class="input" />
+							<span asp-validation-for="Input.Name" class="text-danger"></span>
+						</div>
+						<div class="input_field">
+							<input asp-for="Input.Surname" placeholder="Surname" class="input" />
+							<span asp-validation-for="Input.Surname" class="text-danger"></span>
+						</div>
+						<div class="input_field">
+							<input asp-for="Input.UserName" placeholder="Username" class="input" />
+							<span asp-validation-for="Input.UserName" class="text-danger"></span>
+						</div>
+						<div class="input_field">
+							<input asp-for="Input.Age" placeholder="Age" class="input" />
+							<span asp-validation-for="Input.Age" class="text-danger"></span>
+						</div>
+						<div class="input_field">
+							<select asp-for="Input.Gender" class="input" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+							<span asp-validation-for="Input.Gender" class="text-danger"></span>
+						</div>
+						<div class="input_field">
+							<input asp-for="Input.Password" placeholder="Password" class="input" />
+							<span asp-validation-for="Input.Password" class="text-danger"></span>
+						</div>
+						<div class="input_field">
+							<input asp-for="Input.ConfirmPassword" placeholder="Confirm password" class="input" />
+							<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+						</div>
+						<!--<div class="btn">
+							<a href="#" style="text-decoration:none;">Sign Up</a>
+						</div>-->
+						<button type="submit" class="btn btn-primary">Sign up</button>
+					</div>
+				</form>
+			</div>
+			<div class="login">
+				<p>Have an account? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" style="text-decoration:none;">Login</a></p>
+			</div>
 		</div>
 	</div>
-</div>
-
 </body>
 </html>
 

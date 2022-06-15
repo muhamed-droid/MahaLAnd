@@ -8,7 +8,6 @@
     ViewData["Title"] = "Feed";
 }
 
-<!--<p><a asp-action="Create">Create New</a></p>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +25,6 @@
             @using (Html.BeginForm("Search", "Home", FormMethod.Get))
             {
                 <div class="search-box">
-                    <!--<a asp-controller="Home" asp-action="Search" asp-route-id="@Model.SearchedUser"><i class="fa-solid fa-magnifying-glass" style="color:gray"></i></a>-->
                     <i class="fa-solid fa-magnifying-glass" style="color:gray"></i>
                     <input type="search" name="SearchedUser" placeholder="Search" />
                 </div>
@@ -37,11 +35,6 @@
                         <a href="#"><i class="fa-solid fa-house"></i></a>
                     </li>
                     <li>
-                        <!--<input type="file" name="photo" id="addPhotoInput" />-->
-                        <!--<input asp-for="@Model." accept="image/*" />
-                        <label for="addPhotoInput">
-                            <i class="add-photo fa-solid fa-square-plus"></i>
-                        </label>-->
                         <a asp-controller="Post" asp-action="Create"><i class="fa-solid fa-square-plus"></i></a>
                     </li>
                     <li>
@@ -55,13 +48,9 @@
         </header>
         <section>
             <div class="left-side">
-                <!--<div class="story">
-
-                </div>-->
                 @foreach(var item in Model.Feed)
                 {
                     <div class="posts">
-                        <!--foreach-->
                         <div class="post-title">
                             <div class="post-left">
                                 <div class="image">
@@ -72,7 +61,6 @@
                                 </div>
                             </div>
                             <div class="post-right">
-                                <!--<i class="fas fa-ellipsis-h"></i>-->
                             </div>
                         </div>
                         <div class="post-content">
@@ -109,28 +97,6 @@
                                 </div>
                             </div>
                         }
-
-                        <!--<div class="post-footer">
-                            <div class="like-comment">
-                                <i class="far fa-heart"></i>
-                                <i class="far fa-comment"></i>
-                            </div>
-                        </div>
-                        <div class="post-footer-content">
-                            <p class="likes">15 likes</p>
-                            <p class="name">esma</p>
-                            <p class="comments">100 comments</p>
-                            <p class="posting-time">10 hours</p>
-                        </div>
-                        <div class="add-comment">
-                            <div class="left-side">
-                                <i class="far fa-smile-beam"></i>
-                                <input type="text" placeholder="Add a comment..." />
-                            </div>
-                            <div class="right-sidee">
-                                <p>Post</p>
-                            </div>
-                        </div>-->
                     </div>
                 }
             </div>
