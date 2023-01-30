@@ -9,5 +9,5 @@ Idea was to go through every step in creating an application.
 
 ********************************************************************************************************************************************
 
-Although, there is only one contributor, I assure you that everyone form the team worked on this project. The contributor was leader of the team. 
+Although, there is only one contributor, I assure you that everyone form the team worked on this project. The only two contributors were leader of the team and subject assistant. 
 She gave us tasks, and we sent her back everything done, and then she used to push that to repository. This happened two years ago, and we didn't work properly, but know, I know very well how to work in team. 
